@@ -40,7 +40,7 @@ type ValidParenthesesFunc func(s string) bool
 
 func ValidParentheses(s string) bool {
 
-	openers := ""
+	openers := []rune{}
 
 	pairs := map[rune]rune{
 		'}': '{',
@@ -48,10 +48,10 @@ func ValidParentheses(s string) bool {
 		']': '[',
 	}
 
-	for _, c := range []rune(s) {
+	for _, c := range s {
 		if opener, isCloser := pairs[c]; isCloser {
 			if len(openers) > 0 {
-				if rune(openers[len(openers)-1]) != opener {
+				if openers[len(openers)-1] != opener {
 					return false
 				}
 				openers = openers[0 : len(openers)-1]
@@ -59,10 +59,10 @@ func ValidParentheses(s string) bool {
 				return false
 			}
 		} else {
-			openers += string(c)
+			openers = append(openers, c)
 		}
 	}
 
-	return openers == ""
+	return len(openers) == 0
 
 }
