@@ -18,9 +18,12 @@ func TestIsPalindrome(t *testing.T) {
 		{"race a car", false},
 		{" ", true},
 		{"0P", false},
+		{".,", true},
 	}
 	impls := map[string]strings.IsPalindromeFunc{
-		"IsPalindrome": strings.IsPalindromeAttempt,
+		"IsPalindromeAttempt":   strings.IsPalindromeAttempt,
+		"IsPalindromeAttempt2":  strings.IsPalindromeAttempt2,
+		"IsPalindromeReference": strings.IsPalindromeReference,
 	}
 
 	for name, impl := range impls {
@@ -28,7 +31,7 @@ func TestIsPalindrome(t *testing.T) {
 			t.Run(fmt.Sprintf("%s (string=\"%s\")", name, testCase.s), func(t *testing.T) {
 				actual := impl(testCase.s)
 				if actual != testCase.expected {
-					t.Errorf("wanted %v; got %v", actual, testCase.expected)
+					t.Errorf("wanted %v; got %v", testCase.expected, actual)
 				}
 			})
 		}
