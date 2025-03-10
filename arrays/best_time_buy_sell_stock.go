@@ -28,15 +28,15 @@ type MaxProfitFunc func(prices []int) int
 func MaxProfitAttempt(prices []int) int {
 
 	maxProfit := 0
-	lowestBuyIdx := -1
+	lowestPriceIdx := 0
 
 	for i := 1; i < len(prices); i++ {
-		if lowestBuyIdx == -1 || prices[i-1] < prices[lowestBuyIdx] {
-			lowestBuyIdx = i - 1
+		if prices[i-1] < prices[lowestPriceIdx] {
+			lowestPriceIdx = i - 1
 		}
-		lowestBuy := prices[lowestBuyIdx]
-		if prices[i]-lowestBuy > maxProfit {
-			maxProfit = prices[i] - lowestBuy
+		lowestPrice := prices[lowestPriceIdx]
+		if prices[i]-lowestPrice > maxProfit {
+			maxProfit = prices[i] - lowestPrice
 		}
 	}
 
