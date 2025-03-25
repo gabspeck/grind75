@@ -13,7 +13,7 @@ func TestHasCycle(t *testing.T) {
 	}{
 		{
 			list: func() *linked_lists.ListNode {
-				head := linked_lists.NewLinkedList(3, 2, 0, -4)
+				head := linked_lists.New(3, 2, 0, -4)
 				head.Tail().Next = head.Next
 				return head
 			}(),
@@ -21,14 +21,14 @@ func TestHasCycle(t *testing.T) {
 		},
 		{
 			list: func() *linked_lists.ListNode {
-				head := linked_lists.NewLinkedList(1, 2)
+				head := linked_lists.New(1, 2)
 				head.Tail().Next = head
 				return head
 			}(),
 			expected: true,
 		},
 		{
-			list:     linked_lists.NewLinkedList(1),
+			list:     linked_lists.New(1),
 			expected: false,
 		},
 	}

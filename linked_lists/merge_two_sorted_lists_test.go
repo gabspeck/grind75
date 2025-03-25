@@ -13,9 +13,9 @@ func TestMergeTwoListsAttempt(t *testing.T) {
 		expected *linked_lists.ListNode
 	}{
 		{
-			list1:    linked_lists.NewLinkedList(1, 2, 4),
-			list2:    linked_lists.NewLinkedList(1, 3, 4),
-			expected: linked_lists.NewLinkedList(1, 1, 2, 3, 4, 4),
+			list1:    linked_lists.New(1, 2, 4),
+			list2:    linked_lists.New(1, 3, 4),
+			expected: linked_lists.New(1, 1, 2, 3, 4, 4),
 		},
 		{
 			list1:    nil,
@@ -24,8 +24,8 @@ func TestMergeTwoListsAttempt(t *testing.T) {
 		},
 		{
 			list1:    nil,
-			list2:    linked_lists.NewLinkedList(0),
-			expected: linked_lists.NewLinkedList(0),
+			list2:    linked_lists.New(0),
+			expected: linked_lists.New(0),
 		},
 	}
 	impls := map[string]linked_lists.MergeTwoListsFunc{

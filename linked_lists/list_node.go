@@ -10,7 +10,7 @@ type ListNode struct {
 	Next *ListNode
 }
 
-func NewLinkedList(items ...int) *ListNode {
+func New(items ...int) *ListNode {
 	if len(items) < 1 {
 		return nil
 	}
@@ -21,6 +21,21 @@ func NewLinkedList(items ...int) *ListNode {
 		tail = tail.Next
 	}
 	return head
+}
+
+func Copy(oldList *ListNode) *ListNode {
+	if oldList == nil {
+		return nil
+	}
+	newHead := &ListNode{oldList.Val, nil}
+	tail := newHead
+	oldList = oldList.Next
+	for oldList != nil {
+		tail.Next = &ListNode{oldList.Val, nil}
+		tail = tail.Next
+		oldList = oldList.Next
+	}
+	return newHead
 }
 
 func (head *ListNode) String() string {
