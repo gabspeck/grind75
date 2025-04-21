@@ -26,7 +26,7 @@ func TestFloodFill(t *testing.T) {
 
 	for name, impl := range impls {
 		for _, testCase := range cases {
-			image := makeImageCopy(testCase.image)
+			image := arrays.Copy2DSlice(testCase.image)
 			t.Run(fmt.Sprintf("%s (image=%v, sr=%v, sc=%v, color=%v)", name, image, testCase.sr, testCase.sc, testCase.color), func(t *testing.T) {
 				actual := impl(image, testCase.sr, testCase.sc, testCase.color)
 				if fmt.Sprintf("%v", actual) != fmt.Sprintf("%v", testCase.expected) {
@@ -74,7 +74,7 @@ func BenchmarkFloodFill(b *testing.B) {
 				// Run the benchmark b.N times
 				for i := 0; i < b.N; i++ {
 					// Create a fresh copy of the image for each iteration
-					imageCopy := makeImageCopy(tc.image)
+					imageCopy := arrays.Copy2DSlice(tc.image)
 
 					// Call the implementation being benchmarked
 					_ = impl(imageCopy, tc.sr, tc.sc, tc.color)
@@ -82,19 +82,6 @@ func BenchmarkFloodFill(b *testing.B) {
 			})
 		}
 	}
-}
-
-// makeImageCopy creates a deep copy of a 2D integer slice.
-// This is necessary because Go's copy() function only performs shallow copies.
-func makeImageCopy(original [][]int) [][]int {
-	imageCopy := make([][]int, len(original))
-	for i := range original {
-		imageCopy[i] = make([]int, len(original[i]))
-		for j := range original[i] {
-			imageCopy[i][j] = original[i][j]
-		}
-	}
-	return imageCopy
 }
 
 // generateFilledImage creates a rows×cols image filled with the specified color.
